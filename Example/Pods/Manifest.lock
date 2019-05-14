@@ -1,0 +1,23 @@
+PODS:
+  - Masonry (1.1.0)
+  - PerspectiveEye (0.1.0):
+    - Masonry
+
+DEPENDENCIES:
+  - PerspectiveEye (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Masonry
+
+EXTERNAL SOURCES:
+  PerspectiveEye:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  PerspectiveEye: 10b2d272e9e7e1fcab0af08f2e4d6ae65d374a78
+
+PODFILE CHECKSUM: a2b271108e5d0823b4fdc021671299e4e4153520
+
+COCOAPODS: 1.5.3

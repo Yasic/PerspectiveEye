@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'PerspectiveEye_Example' do
+  pod 'PerspectiveEye', :path => '../'
+
+  target 'PerspectiveEye_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

@@ -1,0 +1,6 @@
+framework module PerspectiveEye {
+  umbrella header "PerspectiveEye-umbrella.h"
+
+  export *
+  module * { export * }
+}
