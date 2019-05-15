@@ -8,7 +8,8 @@
 #import "PEYPerspectiveView.h"
 #import "PEYSCNNodeCreator.h"
 #import "PEVViewNodeGroup.h"
-#import "PEVRangeSlider.h"
+#import "PEYRangeSlider.h"
+#import "PEYConstraintsView.h"
 
 @interface PEYPerspectiveView() <SCNSceneRendererDelegate>
 
@@ -47,7 +48,7 @@
 /**
  深度调节器
  */
-@property (nonatomic, strong) PEVRangeSlider *depthSlider;
+@property (nonatomic, strong) PEYRangeSlider *depthSlider;
 
 /**
  仅展示边框文案
@@ -69,6 +70,24 @@
  */
 @property (nonatomic, strong) UISwitch *headerSwitch;
 
+/**
+ 展示约束开关文案
+ */
+@property (nonatomic, strong) UILabel *constraintsShowLabel;
+
+/**
+ 展示约束开关
+ */
+@property (nonatomic, strong) UISwitch *constraintsShowSwitch;
+
+/**
+ 约束关系展示列表
+ */
+@property (nonatomic, strong) PEYConstraintsView *constraintsView;
+
+@property (nonatomic, strong) MASConstraint *constrainsShowConstraint;
+@property (nonatomic, strong) MASConstraint *constrainsHiddenConstraint;
+
 @end
 
 @implementation PEYPerspectiveView
@@ -88,7 +107,7 @@
         CGFloat maxDepth = [group renderToScene:self.scnScene parentNode:nil nodeGroupMap:self.nodeGroupMap depth:0.0f];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        [self addGestureRecognizer:tap];
+        [self.scnView addGestureRecognizer:tap];
         
         __weak __typeof(&*self) weak_self = self;
         self.depthSlider.rangeSliderValueChanged = ^(CGFloat location, CGFloat length) {
@@ -126,6 +145,7 @@
         group.isHighlight = YES;
         self.highlightGroup = group;
         self.elementDescLabel.text = group.viewElement.elementDescrption;
+        self.constraintsView.targetView = group.viewElement.targetView;
     }
 }
 
@@ -156,6 +176,21 @@
 {
     [self.nodeGroupMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, PEVViewNodeGroup *group, BOOL * _Nonnull stop) {
         group.showHeaderInfo = self.headerSwitch.isOn;
+    }];
+}
+
+- (void)constraintsShowSwitchClicked
+{
+    [self layoutIfNeeded];
+    if (self.constraintsShowSwitch.isOn) {
+        [self.constrainsHiddenConstraint deactivate];
+        [self.constrainsShowConstraint activate];
+    } else {
+        [self.constrainsHiddenConstraint activate];
+        [self.constrainsShowConstraint deactivate];
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        [self layoutIfNeeded];
     }];
 }
 
@@ -206,19 +241,24 @@
     [self addSubview:self.wireframeSwitch];
     [self addSubview:self.showHeaderLabel];
     [self addSubview:self.headerSwitch];
+    [self addSubview:self.constraintsShowLabel];
+    [self addSubview:self.constraintsShowSwitch];
+    [self addSubview:self.constraintsView];
     [self.scnView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self);
         make.bottom.equalTo(self.depthSlider.mas_top);
     }];
     [self.spacingSlider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self).inset(24);
+        make.left.equalTo(self).inset(24);
         make.bottom.equalTo(self).offset(-10);
+        make.width.mas_equalTo(SCREEN_WIDTH/2 - 24 - 12);
         make.height.mas_equalTo(20);
     }];
     [self.depthSlider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self).inset(24);
-        make.bottom.equalTo(self.spacingSlider.mas_top).offset(-10);
+        make.right.equalTo(self).inset(24);
+        make.bottom.equalTo(self.spacingSlider);
         make.height.mas_equalTo(24);
+        make.left.equalTo(self.spacingSlider.mas_right).offset(24);
     }];
     [self.elementDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self).inset(10);
@@ -237,9 +277,26 @@
         make.top.equalTo(self.wireframeSwitch.mas_bottom).offset(15);
     }];
     [self.headerSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.showHeaderLabel.mas_right).offset(15);
+        make.left.equalTo(self.wireframeSwitch);
         make.centerY.equalTo(self.showHeaderLabel);
     }];
+    [self.constraintsShowLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(15);
+        make.top.equalTo(self.showHeaderLabel.mas_bottom).offset(15);
+    }];
+    [self.constraintsShowSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.wireframeSwitch);
+        make.centerY.equalTo(self.constraintsShowLabel);
+    }];
+    [self.constraintsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.wireframeSwitch.mas_right).offset(10);
+        make.right.equalTo(self);
+        make.top.equalTo(self);
+        self.constrainsShowConstraint = make.height.equalTo(self).multipliedBy(0.3);
+        self.constrainsHiddenConstraint = make.height.equalTo(self).multipliedBy(0);
+    }];
+    [self.constrainsShowConstraint deactivate];
+    [self.constrainsHiddenConstraint deactivate];
 }
 
 - (SCNView *)scnView
@@ -288,10 +345,10 @@
     return _spacingSlider;
 }
 
-- (PEVRangeSlider *)depthSlider
+- (PEYRangeSlider *)depthSlider
 {
     if (!_depthSlider) {
-        _depthSlider = [PEVRangeSlider new];
+        _depthSlider = [PEYRangeSlider new];
     }
     return _depthSlider;
 }
@@ -334,6 +391,36 @@
         [_headerSwitch addTarget:self action:@selector(headerSwitchClicked) forControlEvents:UIControlEventValueChanged];
     }
     return _headerSwitch;
+}
+
+- (UILabel *)constraintsShowLabel
+{
+    if (!_constraintsShowLabel) {
+        _constraintsShowLabel = [UILabel new];
+        _constraintsShowLabel.text = @"展示约束";
+        _constraintsShowLabel.font = Font(14);
+        _constraintsShowLabel.textColor = HEXCOLOR(0x222333);
+    }
+    return _constraintsShowLabel;
+}
+
+- (UISwitch *)constraintsShowSwitch
+{
+    if (!_constraintsShowSwitch) {
+        _constraintsShowSwitch = [UISwitch new];
+        [_constraintsShowSwitch addTarget:self action:@selector(constraintsShowSwitchClicked) forControlEvents:UIControlEventValueChanged];
+    }
+    return _constraintsShowSwitch;
+}
+
+- (PEYConstraintsView *)constraintsView
+{
+    if (!_constraintsView) {
+        _constraintsView = [PEYConstraintsView new];
+        _constraintsView.clipsToBounds = YES;
+        _constraintsView.backgroundColor = HEXACOLOR(0x222333, 0.5);
+    }
+    return _constraintsView;
 }
 
 #pragma mark SceneKit 回调函数

@@ -33,11 +33,13 @@
 		6E80C5C65FFC63A01B004F4054B7A143 /* PEYViewElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A548EE2DD9C71505BB9A82DE4BF3AC /* PEYViewElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73300003438DC542B9D0546D73877707 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F6FFE47506B20F92B135A335E50B6E9F /* MASViewConstraint.m */; };
 		7390990ADCBF9AB82DCEC400A01D6F4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA91733EBD35A200DCA9BE2E497FF47 /* Foundation.framework */; };
+		7461F33A228BA26F00CC09DF /* PEYConstraintsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7461F338228BA26F00CC09DF /* PEYConstraintsView.h */; };
+		7461F33B228BA26F00CC09DF /* PEYConstraintsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7461F339228BA26F00CC09DF /* PEYConstraintsView.m */; };
 		75C5B6C21E0CC4898AE48E52DDA91375 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F958E9E8CA5C5F1DD8F53FFAEDFDF /* View+MASAdditions.m */; };
 		79032EBEB8F6AE0DA9AFC10D45C00AC9 /* NSArray+PEYCollectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 688CEE8A0661DE3D7EFBF86B31BCF546 /* NSArray+PEYCollectionOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C8839CE499275842EFCD5620C614620 /* NSDictionary+PEYCollectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02925803D383B2ADF178065E41E3C9F6 /* NSDictionary+PEYCollectionOperation.m */; };
 		88A3CAA76DB9495E17D5B49DD9651168 /* PEYPerspectiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D0822C4F6324761ABCA8A39F0270F1 /* PEYPerspectiveViewController.m */; };
-		8E2FBEA93FEC252AA6A7A772CE9D9CE2 /* PEVRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CF727A5252E336F7CC9E526422B6A372 /* PEVRangeSlider.m */; };
+		8E2FBEA93FEC252AA6A7A772CE9D9CE2 /* PEYRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CF727A5252E336F7CC9E526422B6A372 /* PEYRangeSlider.m */; };
 		9269E802D3E20C338BDDFF5DA07029E5 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EF30F780E2BD14DF24481BDC5498546 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		94C1561BC701BB0EA90A7DD26B5D2D4F /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = B2E90708D5E58877A06F2A402BF8FC16 /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		98246C70D6D9B0CC5894178830C69DB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA91733EBD35A200DCA9BE2E497FF47 /* Foundation.framework */; };
@@ -60,7 +62,7 @@
 		DB30301DA9C1724C5AF3CDB66A1F2DD1 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC8C4AA8DBFEE62B86A81ECA9A06171 /* SceneKit.framework */; };
 		DDA0C9910C0F791259FCB4E0E85F3DBD /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D05AC0D83EDD307DE6810AB1A545195C /* Masonry-dummy.m */; };
 		DDC5DE76CA3AC9073FB5C6BFBA026AFE /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FA2F422D817FCC200276FEE81A8466 /* NSArray+MASAdditions.m */; };
-		E1BBAF160F82877BB13D10C975E5EF87 /* PEVRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 19CC053D13188A9CD6D42CDC212110B3 /* PEVRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E1BBAF160F82877BB13D10C975E5EF87 /* PEYRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 19CC053D13188A9CD6D42CDC212110B3 /* PEYRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F2C6E97307F6F0149D69233B03F3E3EB /* PEYPerspectiveViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B7909ED3E0C74BD7E7FE509971CF646F /* PEYPerspectiveViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F50920C2026473CF11E5C635750F12EE /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = F4C7DE6E4FB2607791F1E38E82B0550F /* Masonry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5C9CAD634744DFE373DA45B0CD1806C /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C55901E770E7D3DF78180E0F7B2F4D /* MASCompositeConstraint.m */; };
@@ -109,12 +111,12 @@
 		0AFD6A0936FAF9BD940AC40B45626412 /* Pods-PerspectiveEye_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PerspectiveEye_Example-umbrella.h"; sourceTree = "<group>"; };
 		0BD1BFDF5669B05989C8CA6611E4316D /* Pods-PerspectiveEye_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PerspectiveEye_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		128972FD38EAF7E248C96FA213027F03 /* Pods-PerspectiveEye_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PerspectiveEye_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		19CC053D13188A9CD6D42CDC212110B3 /* PEVRangeSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PEVRangeSlider.h; sourceTree = "<group>"; };
+		19CC053D13188A9CD6D42CDC212110B3 /* PEYRangeSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PEYRangeSlider.h; sourceTree = "<group>"; };
 		1BFB0B11795C1B40153A1A6792AD8430 /* MASViewAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
-		1D798B293CD06A9E9B265B57B2D97DD4 /* PerspectiveEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PerspectiveEye.framework; path = PerspectiveEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D798B293CD06A9E9B265B57B2D97DD4 /* PerspectiveEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PerspectiveEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		21C55901E770E7D3DF78180E0F7B2F4D /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
 		23A548EE2DD9C71505BB9A82DE4BF3AC /* PEYViewElement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PEYViewElement.h; sourceTree = "<group>"; };
-		24390EFD555DD124430DFF9724065945 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		24390EFD555DD124430DFF9724065945 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2A25616029B4FC5676B044BBD02C54C2 /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
 		2C1A2D0C5FD64214F06E0F73572313C1 /* Pods-PerspectiveEye_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PerspectiveEye_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		2F1F958E9E8CA5C5F1DD8F53FFAEDFDF /* View+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
@@ -127,7 +129,7 @@
 		455C3782A9876EEB3A54FDA272C0CD22 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		49EB6C582F70C658309970A93166758C /* Pods-PerspectiveEye_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PerspectiveEye_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4C9B2014C24ADA03537F3B21DB6735E4 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
-		4F8C6A9B910A28A67946FE6073B2C623 /* PerspectiveEye.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = PerspectiveEye.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		4F8C6A9B910A28A67946FE6073B2C623 /* PerspectiveEye.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = PerspectiveEye.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		58ED898519A0D4BAC4721B51B3F90CF5 /* Masonry.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.xcconfig; sourceTree = "<group>"; };
 		5C6C501769E2DA3CE22CE4BA9B61BD90 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
 		5FA91733EBD35A200DCA9BE2E497FF47 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -135,15 +137,17 @@
 		66B922155EC101691EAEC24F5BB12170 /* Pods-PerspectiveEye_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PerspectiveEye_Example.modulemap"; sourceTree = "<group>"; };
 		688CEE8A0661DE3D7EFBF86B31BCF546 /* NSArray+PEYCollectionOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSArray+PEYCollectionOperation.h"; sourceTree = "<group>"; };
 		6C6624EA0EDFA9F72CF6A18E889D0D25 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		6CD5A77C7EF1A5AFAB6C64A38B19FDE8 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Masonry.framework; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CD5A77C7EF1A5AFAB6C64A38B19FDE8 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF9A72FB09E6A10482EB5E50FD7B6DB /* Pods-PerspectiveEye_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PerspectiveEye_Tests-resources.sh"; sourceTree = "<group>"; };
 		6E1B587E84BB6D830F7F7AC44EE9DC67 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71952D6B483737C09325D4AB561EE3AC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		738D664E153E8F7C7893D952F8C87834 /* PEYViewElement.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PEYViewElement.m; sourceTree = "<group>"; };
+		7461F338228BA26F00CC09DF /* PEYConstraintsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PEYConstraintsView.h; sourceTree = "<group>"; };
+		7461F339228BA26F00CC09DF /* PEYConstraintsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PEYConstraintsView.m; sourceTree = "<group>"; };
 		78526D2C8FDDA6A9A4034A969422E45B /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		7B3146B0CAD86350185ED48D2AFD160A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C14BDE14CAB99811AAF8619FE91195B /* Pods-PerspectiveEye_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PerspectiveEye_Example-resources.sh"; sourceTree = "<group>"; };
-		7FD80AC253701ED74F1815DB8895093B /* Pods_PerspectiveEye_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PerspectiveEye_Tests.framework; path = "Pods-PerspectiveEye_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FD80AC253701ED74F1815DB8895093B /* Pods_PerspectiveEye_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PerspectiveEye_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DE4429D279DB01829CB2031E7B7062 /* Pods-PerspectiveEye_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PerspectiveEye_Tests-dummy.m"; sourceTree = "<group>"; };
 		885637889CCFF06E23CE9FD4E9CE1314 /* PEYDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PEYDefines.h; sourceTree = "<group>"; };
 		89286B607043EF52DC1580A838A8D2F4 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
@@ -161,7 +165,7 @@
 		B2E90708D5E58877A06F2A402BF8FC16 /* MASConstraint+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASConstraint+Private.h"; path = "Masonry/MASConstraint+Private.h"; sourceTree = "<group>"; };
 		B41497A10A9B492854DD4BEA5EAD897D /* NSDictionary+PEYCollectionOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+PEYCollectionOperation.h"; sourceTree = "<group>"; };
 		B725C4B0A4D0E4868F678AEE23C5B1F2 /* PEVViewNodeGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PEVViewNodeGroup.h; sourceTree = "<group>"; };
-		B76CD59C8015927FAE29D6F1251B1D85 /* Pods_PerspectiveEye_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PerspectiveEye_Example.framework; path = "Pods-PerspectiveEye_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B76CD59C8015927FAE29D6F1251B1D85 /* Pods_PerspectiveEye_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PerspectiveEye_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7909ED3E0C74BD7E7FE509971CF646F /* PEYPerspectiveViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PEYPerspectiveViewController.h; sourceTree = "<group>"; };
 		B8BF3AE0B76557D9C1244FD530C36964 /* Pods-PerspectiveEye_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PerspectiveEye_Tests-umbrella.h"; sourceTree = "<group>"; };
 		BA1930EA5A0D0E7DC87664879DB6D032 /* MASConstraintMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
@@ -171,14 +175,14 @@
 		CBCC9497EC6D9F444D3DF5377DDE8E6E /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD67C3DFC777F766CCA4F3340827F189 /* PEYPerspectiveView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PEYPerspectiveView.m; sourceTree = "<group>"; };
 		CE1F404471E734FD2E91B9AA72EE50D7 /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
-		CF727A5252E336F7CC9E526422B6A372 /* PEVRangeSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PEVRangeSlider.m; sourceTree = "<group>"; };
+		CF727A5252E336F7CC9E526422B6A372 /* PEYRangeSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PEYRangeSlider.m; sourceTree = "<group>"; };
 		D05AC0D83EDD307DE6810AB1A545195C /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
 		D0B712021E2B63E2330A446A4880A878 /* PerspectiveEye-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PerspectiveEye-prefix.pch"; sourceTree = "<group>"; };
-		D64D512C2CC1415A232A743117123C03 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		D64D512C2CC1415A232A743117123C03 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D98729D388525C1741E1AF5083C0B910 /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
 		DBF550C2C5FB7B7E212DC7B6DA87643F /* PEYSCNNodeCreator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PEYSCNNodeCreator.h; sourceTree = "<group>"; };
 		DD156989B160B160D5CF548CF956AB11 /* Pods-PerspectiveEye_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PerspectiveEye_Example.release.xcconfig"; sourceTree = "<group>"; };
-		E10B8F0C3899AA68779590AFC5CF2723 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		E10B8F0C3899AA68779590AFC5CF2723 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		EC6F744A3DA1C0EE12D10CB82411B05E /* MASConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Masonry/MASConstraint.h; sourceTree = "<group>"; };
 		EDC8C4AA8DBFEE62B86A81ECA9A06171 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/SceneKit.framework; sourceTree = DEVELOPER_DIR; };
 		F4C7DE6E4FB2607791F1E38E82B0550F /* Masonry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Masonry/Masonry.h; sourceTree = "<group>"; };
@@ -368,7 +372,6 @@
 				4C9B2014C24ADA03537F3B21DB6735E4 /* ViewController+MASAdditions.m */,
 				E7D972E51F76C06A1937889A666AF766 /* Support Files */,
 			);
-			name = Masonry;
 			path = Masonry;
 			sourceTree = "<group>";
 		};
@@ -393,10 +396,12 @@
 		AA69C936D005D4A99003AD533DE2F744 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				19CC053D13188A9CD6D42CDC212110B3 /* PEVRangeSlider.h */,
-				CF727A5252E336F7CC9E526422B6A372 /* PEVRangeSlider.m */,
+				19CC053D13188A9CD6D42CDC212110B3 /* PEYRangeSlider.h */,
+				CF727A5252E336F7CC9E526422B6A372 /* PEYRangeSlider.m */,
 				9C9886C4AEF29EF10C4A742292AA7A5D /* PEYPerspectiveView.h */,
 				CD67C3DFC777F766CCA4F3340827F189 /* PEYPerspectiveView.m */,
+				7461F338228BA26F00CC09DF /* PEYConstraintsView.h */,
+				7461F339228BA26F00CC09DF /* PEYConstraintsView.m */,
 			);
 			name = View;
 			path = PerspectiveEye/Classes/View;
@@ -514,13 +519,14 @@
 				79032EBEB8F6AE0DA9AFC10D45C00AC9 /* NSArray+PEYCollectionOperation.h in Headers */,
 				CE80B1C2B8E456FDBE831DDE608EB7F0 /* NSDictionary+PEYCollectionOperation.h in Headers */,
 				16E2D8887A1C44E2F5657270C31F0902 /* PerspectiveEye-umbrella.h in Headers */,
-				E1BBAF160F82877BB13D10C975E5EF87 /* PEVRangeSlider.h in Headers */,
+				E1BBAF160F82877BB13D10C975E5EF87 /* PEYRangeSlider.h in Headers */,
 				9FD8B065EF60E6132EE3D456643B92C9 /* PEVViewNodeGroup.h in Headers */,
 				D6DFD6DB1A54AA7181004A6FC6542FB5 /* PEYDefines.h in Headers */,
 				9FA6A8C89F198C3AB43D07B4406E5160 /* PEYPerspectiveView.h in Headers */,
 				F2C6E97307F6F0149D69233B03F3E3EB /* PEYPerspectiveViewController.h in Headers */,
 				1AAA1768E1C76056305E9546AF7C27D7 /* PEYSCNNodeCreator.h in Headers */,
 				6E80C5C65FFC63A01B004F4054B7A143 /* PEYViewElement.h in Headers */,
+				7461F33A228BA26F00CC09DF /* PEYConstraintsView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,9 +675,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				320772018A7903820D2181C9B04F7BA9 /* NSArray+PEYCollectionOperation.m in Sources */,
+				7461F33B228BA26F00CC09DF /* PEYConstraintsView.m in Sources */,
 				7C8839CE499275842EFCD5620C614620 /* NSDictionary+PEYCollectionOperation.m in Sources */,
 				69684A8F805A6EC6679B948F8C395548 /* PerspectiveEye-dummy.m in Sources */,
-				8E2FBEA93FEC252AA6A7A772CE9D9CE2 /* PEVRangeSlider.m in Sources */,
+				8E2FBEA93FEC252AA6A7A772CE9D9CE2 /* PEYRangeSlider.m in Sources */,
 				05DE6AED6A0FE753CCCEE442741591CE /* PEVViewNodeGroup.m in Sources */,
 				01F86B6E115DFAACC87B138E35BD48E3 /* PEYPerspectiveView.m in Sources */,
 				88A3CAA76DB9495E17D5B49DD9651168 /* PEYPerspectiveViewController.m in Sources */,
@@ -897,8 +904,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};

@@ -1,22 +1,22 @@
 //
-//  PEVRangeSlider.m
+//  PEYRangeSlider.m
 //  PerspectiveEye
 //
 //  Created by yasic on 2019/5/13.
 //
 
-#import "PEVRangeSlider.h"
+#import "PEYRangeSlider.h"
 
 static CGFloat const kSlideControlRadius = 24;
 
-@interface PEVRangeSlideControl : UIView
+@interface PEYRangeSlideControl : UIView
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, copy) void (^moveAction)(UITouch *touch);
 
 @end
 
-@implementation PEVRangeSlideControl
+@implementation PEYRangeSlideControl
 
 - (instancetype)init
 {
@@ -86,7 +86,7 @@ static CGFloat const kSlideControlRadius = 24;
 
 @end
 
-@interface PEVRangeSlider()
+@interface PEYRangeSlider()
 
 /**
  背景线条视图
@@ -96,16 +96,16 @@ static CGFloat const kSlideControlRadius = 24;
 /**
  下界控制器
  */
-@property (nonatomic, strong) PEVRangeSlideControl *minimunControl;
+@property (nonatomic, strong) PEYRangeSlideControl *minimunControl;
 
 /**
  上界控制器
  */
-@property (nonatomic, strong) PEVRangeSlideControl *maxmunControl;
+@property (nonatomic, strong) PEYRangeSlideControl *maxmunControl;
 
 @end
 
-@implementation PEVRangeSlider
+@implementation PEYRangeSlider
 
 - (instancetype)init
 {
@@ -184,18 +184,18 @@ static CGFloat const kSlideControlRadius = 24;
     return _lineView;
 }
 
-- (PEVRangeSlideControl *)minimunControl
+- (PEYRangeSlideControl *)minimunControl
 {
     if (!_minimunControl) {
-        _minimunControl = [PEVRangeSlideControl new];
+        _minimunControl = [PEYRangeSlideControl new];
     }
     return _minimunControl;
 }
 
-- (PEVRangeSlideControl *)maxmunControl
+- (PEYRangeSlideControl *)maxmunControl
 {
     if (!_maxmunControl) {
-        _maxmunControl = [PEVRangeSlideControl new];
+        _maxmunControl = [PEYRangeSlideControl new];
     }
     return _maxmunControl;
 }

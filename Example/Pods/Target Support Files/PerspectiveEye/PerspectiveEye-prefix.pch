@@ -12,5 +12,6 @@
 
 #ifdef __OBJC__
 #import <Masonry/Masonry.h>
+#import <SceneKit/SceneKit.h>
 #import "PEYDefines.h"
 #endif

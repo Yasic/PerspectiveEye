@@ -1,5 +1,5 @@
 //
-//  PEVRangeSlider.h
+//  PEYRangeSlider.h
 //  PerspectiveEye
 //
 //  Created by yasic on 2019/5/13.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PEVRangeSlider : UIView
+@interface PEYRangeSlider : UIView
 
 /**
  区间值变化回调

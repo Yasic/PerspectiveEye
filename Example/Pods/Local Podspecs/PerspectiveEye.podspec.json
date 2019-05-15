@@ -27,9 +27,13 @@
   "prefix_header_contents": [
     "#ifdef __OBJC__",
     "#import <Masonry/Masonry.h>",
+    "#import <SceneKit/SceneKit.h>",
     "#import \"PEYDefines.h\"",
     "#endif"
   ],
+  "xcconfig": {
+    "VALID_ARCHS": "arm64 x86_64"
+  },
   "source_files": "PerspectiveEye/Classes/**/*.{h,m,c}",
   "public_header_files": "PerspectiveEye/Classes/**/*.h",
   "dependencies": {
