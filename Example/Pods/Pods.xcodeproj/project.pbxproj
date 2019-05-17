@@ -35,6 +35,10 @@
 		7390990ADCBF9AB82DCEC400A01D6F4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FA91733EBD35A200DCA9BE2E497FF47 /* Foundation.framework */; };
 		7461F33A228BA26F00CC09DF /* PEYConstraintsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7461F338228BA26F00CC09DF /* PEYConstraintsView.h */; };
 		7461F33B228BA26F00CC09DF /* PEYConstraintsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7461F339228BA26F00CC09DF /* PEYConstraintsView.m */; };
+		74F7F5E4228D57E700189871 /* PEYSettingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 74F7F5E2228D57E700189871 /* PEYSettingView.h */; };
+		74F7F5E5228D57E700189871 /* PEYSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7F5E3228D57E700189871 /* PEYSettingView.m */; };
+		74F7F5E8228D79A400189871 /* PEYNodeSemanticNameManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 74F7F5E6228D79A400189871 /* PEYNodeSemanticNameManager.h */; };
+		74F7F5E9228D79A400189871 /* PEYNodeSemanticNameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7F5E7228D79A400189871 /* PEYNodeSemanticNameManager.m */; };
 		75C5B6C21E0CC4898AE48E52DDA91375 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1F958E9E8CA5C5F1DD8F53FFAEDFDF /* View+MASAdditions.m */; };
 		79032EBEB8F6AE0DA9AFC10D45C00AC9 /* NSArray+PEYCollectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 688CEE8A0661DE3D7EFBF86B31BCF546 /* NSArray+PEYCollectionOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C8839CE499275842EFCD5620C614620 /* NSDictionary+PEYCollectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02925803D383B2ADF178065E41E3C9F6 /* NSDictionary+PEYCollectionOperation.m */; };
@@ -144,6 +148,10 @@
 		738D664E153E8F7C7893D952F8C87834 /* PEYViewElement.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PEYViewElement.m; sourceTree = "<group>"; };
 		7461F338228BA26F00CC09DF /* PEYConstraintsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PEYConstraintsView.h; sourceTree = "<group>"; };
 		7461F339228BA26F00CC09DF /* PEYConstraintsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PEYConstraintsView.m; sourceTree = "<group>"; };
+		74F7F5E2228D57E700189871 /* PEYSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PEYSettingView.h; sourceTree = "<group>"; };
+		74F7F5E3228D57E700189871 /* PEYSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PEYSettingView.m; sourceTree = "<group>"; };
+		74F7F5E6228D79A400189871 /* PEYNodeSemanticNameManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PEYNodeSemanticNameManager.h; sourceTree = "<group>"; };
+		74F7F5E7228D79A400189871 /* PEYNodeSemanticNameManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PEYNodeSemanticNameManager.m; sourceTree = "<group>"; };
 		78526D2C8FDDA6A9A4034A969422E45B /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		7B3146B0CAD86350185ED48D2AFD160A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C14BDE14CAB99811AAF8619FE91195B /* Pods-PerspectiveEye_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PerspectiveEye_Example-resources.sh"; sourceTree = "<group>"; };
@@ -241,6 +249,8 @@
 				CA8244D3C1F2003EBA5370BAA4BB3CC5 /* PEYSCNNodeCreator.m */,
 				23A548EE2DD9C71505BB9A82DE4BF3AC /* PEYViewElement.h */,
 				738D664E153E8F7C7893D952F8C87834 /* PEYViewElement.m */,
+				74F7F5E6228D79A400189871 /* PEYNodeSemanticNameManager.h */,
+				74F7F5E7228D79A400189871 /* PEYNodeSemanticNameManager.m */,
 			);
 			name = Basic;
 			path = PerspectiveEye/Classes/Basic;
@@ -402,6 +412,8 @@
 				CD67C3DFC777F766CCA4F3340827F189 /* PEYPerspectiveView.m */,
 				7461F338228BA26F00CC09DF /* PEYConstraintsView.h */,
 				7461F339228BA26F00CC09DF /* PEYConstraintsView.m */,
+				74F7F5E2228D57E700189871 /* PEYSettingView.h */,
+				74F7F5E3228D57E700189871 /* PEYSettingView.m */,
 			);
 			name = View;
 			path = PerspectiveEye/Classes/View;
@@ -517,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79032EBEB8F6AE0DA9AFC10D45C00AC9 /* NSArray+PEYCollectionOperation.h in Headers */,
+				74F7F5E4228D57E700189871 /* PEYSettingView.h in Headers */,
 				CE80B1C2B8E456FDBE831DDE608EB7F0 /* NSDictionary+PEYCollectionOperation.h in Headers */,
 				16E2D8887A1C44E2F5657270C31F0902 /* PerspectiveEye-umbrella.h in Headers */,
 				E1BBAF160F82877BB13D10C975E5EF87 /* PEYRangeSlider.h in Headers */,
@@ -525,6 +538,7 @@
 				9FA6A8C89F198C3AB43D07B4406E5160 /* PEYPerspectiveView.h in Headers */,
 				F2C6E97307F6F0149D69233B03F3E3EB /* PEYPerspectiveViewController.h in Headers */,
 				1AAA1768E1C76056305E9546AF7C27D7 /* PEYSCNNodeCreator.h in Headers */,
+				74F7F5E8228D79A400189871 /* PEYNodeSemanticNameManager.h in Headers */,
 				6E80C5C65FFC63A01B004F4054B7A143 /* PEYViewElement.h in Headers */,
 				7461F33A228BA26F00CC09DF /* PEYConstraintsView.h in Headers */,
 			);
@@ -679,11 +693,13 @@
 				7C8839CE499275842EFCD5620C614620 /* NSDictionary+PEYCollectionOperation.m in Sources */,
 				69684A8F805A6EC6679B948F8C395548 /* PerspectiveEye-dummy.m in Sources */,
 				8E2FBEA93FEC252AA6A7A772CE9D9CE2 /* PEYRangeSlider.m in Sources */,
+				74F7F5E5228D57E700189871 /* PEYSettingView.m in Sources */,
 				05DE6AED6A0FE753CCCEE442741591CE /* PEVViewNodeGroup.m in Sources */,
 				01F86B6E115DFAACC87B138E35BD48E3 /* PEYPerspectiveView.m in Sources */,
 				88A3CAA76DB9495E17D5B49DD9651168 /* PEYPerspectiveViewController.m in Sources */,
 				D5D8AA7A7FDCC2C533A6E312BB05CB38 /* PEYSCNNodeCreator.m in Sources */,
 				F9D20EB52A67DB754705357E9D27DE83 /* PEYViewElement.m in Sources */,
+				74F7F5E9228D79A400189871 /* PEYNodeSemanticNameManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

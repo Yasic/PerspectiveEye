@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'PerspectiveEye'
-  s.version          = '0.2.0'
-  s.summary          = 'A short description of PerspectiveEye.'
+  s.version          = '0.3.0'
+  s.summary          = 'PerspectiveEye is a "Debug View Hierarchy" tool that is simulated on iOS. It can display the hierarchical relationship, content and constraint information of all UIViews under the current window in 3D perspective.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -14,7 +14,7 @@ TODO: Add long description of the pod here.
                        DESC
 
   s.homepage         = 'https://github.com/Yasic/PerspectiveEye'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.screenshots     = 'https://raw.githubusercontent.com/Yasic/PerspectiveEye/master/Screenshot/normal_mode_01.jpg', 'https://raw.githubusercontent.com/Yasic/PerspectiveEye/master/Screenshot/normal_mode_02.jpg', 'https://raw.githubusercontent.com/Yasic/PerspectiveEye/master/Screenshot/only_wireframe.jpg', 'https://raw.githubusercontent.com/Yasic/PerspectiveEye/master/Screenshot/show_constraints.jpg'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Yasic' => 'yuxuan2580@gmail.com' }
   s.source           = { :git => 'https://github.com/Yasic/PerspectiveEye.git', :tag => s.version.to_s }

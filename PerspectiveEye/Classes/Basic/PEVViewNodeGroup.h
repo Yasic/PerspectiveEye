@@ -78,6 +78,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (CGFloat)renderToScene:(SCNScene *)scene parentNode:(nullable PEYViewElement *)parentViewElement nodeGroupMap:(NSMutableDictionary *)nodeGroupMap depth:(CGFloat)depth;
 
+- (void)showHeaderWithType:(PEVNodeGroupHeaderType)headerType;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -51,36 +51,6 @@
 @property (nonatomic, strong) PEYRangeSlider *depthSlider;
 
 /**
- 仅展示边框文案
- */
-@property (nonatomic, strong) UILabel *wireframeLabel;
-
-/**
- 仅展示边框开关
- */
-@property (nonatomic, strong) UISwitch *wireframeSwitch;
-
-/**
- 开启展示 header 的文案
- */
-@property (nonatomic, strong) UILabel *showHeaderLabel;
-
-/**
- 展示header开关
- */
-@property (nonatomic, strong) UISwitch *headerSwitch;
-
-/**
- 展示约束开关文案
- */
-@property (nonatomic, strong) UILabel *constraintsShowLabel;
-
-/**
- 展示约束开关
- */
-@property (nonatomic, strong) UISwitch *constraintsShowSwitch;
-
-/**
  约束关系展示列表
  */
 @property (nonatomic, strong) PEYConstraintsView *constraintsView;
@@ -126,8 +96,56 @@
 }
 
 /**
- 点击事件处理，需要高亮对应的element
+ 间距滑动条值更新事件
+ */
+- (void)spacingSliderChanged
+{
+    [self.nodeGroupMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, PEVViewNodeGroup  *group, BOOL * _Nonnull stop) {
+        group.groupNode.position = SCNVector3Make(group.groupNode.position.x, group.groupNode.position.y, group.nodeDepth * self.spacingSlider.value);
+    }];
+}
 
+/**
+ 边框开关
+ */
+- (void)onlyWireframe:(BOOL)isOn
+{
+    [self.nodeGroupMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, PEVViewNodeGroup *group, BOOL * _Nonnull stop) {
+        group.onlyWireframe = isOn;
+    }];
+}
+
+/**
+ header开关
+ */
+- (void)showConstrants:(BOOL)isOn
+{
+    [self layoutIfNeeded];
+    if (isOn) {
+        [self.constrainsHiddenConstraint deactivate];
+        [self.constrainsShowConstraint activate];
+    } else {
+        [self.constrainsHiddenConstraint activate];
+        [self.constrainsShowConstraint deactivate];
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        [self layoutIfNeeded];
+    }];
+}
+
+/**
+ 约束开关
+ */
+- (void)showHeader:(BOOL)isOn
+{
+    [self.nodeGroupMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, PEVViewNodeGroup *group, BOOL * _Nonnull stop) {
+        group.showHeaderInfo = isOn;
+    }];
+}
+
+/**
+ 点击事件处理，需要高亮对应的element
+ 
  @param sender 点击处理者
  */
 - (void)tapAction:(UITapGestureRecognizer *)sender
@@ -146,51 +164,54 @@
         self.highlightGroup = group;
         self.elementDescLabel.text = group.viewElement.elementDescrption;
         self.constraintsView.targetView = group.viewElement.targetView;
+        [self showHeaderForView:group.viewElement.targetView];
     }
 }
 
-/**
- 间距滑动条值更新事件
- */
-- (void)spacingSliderChanged
-{
-    [self.nodeGroupMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, PEVViewNodeGroup  *group, BOOL * _Nonnull stop) {
-        group.groupNode.position = SCNVector3Make(group.groupNode.position.x, group.groupNode.position.y, group.nodeDepth * self.spacingSlider.value);
-    }];
-}
-
-/**
- 边框开关
- */
-- (void)wireframeSwitchClicked
+- (void)showHeaderForView:(UIView *)targetView
 {
     [self.nodeGroupMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, PEVViewNodeGroup *group, BOOL * _Nonnull stop) {
-        group.onlyWireframe = self.wireframeSwitch.isOn;
+        group.showHeaderInfo = NO;
     }];
-}
-
-/**
- header开关
- */
-- (void)headerSwitchClicked
-{
-    [self.nodeGroupMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, PEVViewNodeGroup *group, BOOL * _Nonnull stop) {
-        group.showHeaderInfo = self.headerSwitch.isOn;
+    NSArray<NSLayoutConstraint *> *superConstraints = targetView.superview.constraints;
+    NSMutableSet *relativeViewElements = [NSMutableSet set];
+    [superConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (constraint.firstItem != targetView && constraint.secondItem != targetView) {
+            return;
+        }
+        if (constraint.firstItem) {
+            [relativeViewElements addObject:[NSString stringWithFormat:@"%p", constraint.firstItem]];
+        }
+        if (constraint.secondItem) {
+            [relativeViewElements addObject:[NSString stringWithFormat:@"%p", constraint.secondItem]];
+        }
     }];
-}
-
-- (void)constraintsShowSwitchClicked
-{
-    [self layoutIfNeeded];
-    if (self.constraintsShowSwitch.isOn) {
-        [self.constrainsHiddenConstraint deactivate];
-        [self.constrainsShowConstraint activate];
-    } else {
-        [self.constrainsHiddenConstraint activate];
-        [self.constrainsShowConstraint deactivate];
-    }
-    [UIView animateWithDuration:0.3 animations:^{
-        [self layoutIfNeeded];
+    NSArray<NSLayoutConstraint *> *ownConstraints = targetView.constraints;
+    [ownConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (constraint.firstItem != targetView && constraint.secondItem != targetView) {
+            return;
+        }
+        if (constraint.firstItem) {
+            [relativeViewElements addObject:[NSString stringWithFormat:@"%p", constraint.firstItem]];
+        }
+        if (constraint.secondItem) {
+            [relativeViewElements addObject:[NSString stringWithFormat:@"%p", constraint.secondItem]];
+        }
+    }];
+    [relativeViewElements enumerateObjectsUsingBlock:^(NSString * elementIdentifier, BOOL * _Nonnull stop) {
+        if (![self.nodeGroupMap.allKeys containsObject:elementIdentifier] || ![self.nodeGroupMap[elementIdentifier] isKindOfClass:[PEVViewNodeGroup class]]) {
+            return ;
+        }
+        PEVViewNodeGroup *nodeGroup = ((PEVViewNodeGroup*)self.nodeGroupMap[elementIdentifier]);
+        if (nodeGroup.viewElement.targetView == targetView) {
+            [nodeGroup showHeaderWithType:PEVNodeGroupHeaderTypeSelf];
+            return;
+        }
+        if (nodeGroup.viewElement.targetView == targetView.superview) {
+            [nodeGroup showHeaderWithType:PEVNodeGroupHeaderTypeParentView];
+            return;
+        }
+        [nodeGroup showHeaderWithType:PEVNodeGroupHeaderTypeRelativeView];
     }];
 }
 
@@ -237,22 +258,16 @@
     [self addSubview:self.elementDescLabel];
     [self addSubview:self.spacingSlider];
     [self addSubview:self.depthSlider];
-    [self addSubview:self.wireframeLabel];
-    [self addSubview:self.wireframeSwitch];
-    [self addSubview:self.showHeaderLabel];
-    [self addSubview:self.headerSwitch];
-    [self addSubview:self.constraintsShowLabel];
-    [self addSubview:self.constraintsShowSwitch];
     [self addSubview:self.constraintsView];
     [self.scnView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self);
-        make.bottom.equalTo(self.depthSlider.mas_top);
+        make.bottom.equalTo(self);
     }];
     [self.spacingSlider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).inset(24);
-        make.bottom.equalTo(self).offset(-10);
+        make.bottom.equalTo(self.constraintsView.mas_top).offset(-10);
         make.width.mas_equalTo(SCREEN_WIDTH/2 - 24 - 12);
-        make.height.mas_equalTo(20);
+        make.height.mas_equalTo(24);
     }];
     [self.depthSlider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).inset(24);
@@ -262,41 +277,16 @@
     }];
     [self.elementDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self).inset(10);
-        make.bottom.equalTo(self.depthSlider.mas_top).offset(-10);
-    }];
-    
-    [self.wireframeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self).inset(15);
-    }];
-    [self.wireframeSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.wireframeLabel.mas_right).offset(15);
-        make.centerY.equalTo(self.wireframeLabel);
-    }];
-    [self.showHeaderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).offset(15);
-        make.top.equalTo(self.wireframeSwitch.mas_bottom).offset(15);
-    }];
-    [self.headerSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.wireframeSwitch);
-        make.centerY.equalTo(self.showHeaderLabel);
-    }];
-    [self.constraintsShowLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).offset(15);
-        make.top.equalTo(self.showHeaderLabel.mas_bottom).offset(15);
-    }];
-    [self.constraintsShowSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.wireframeSwitch);
-        make.centerY.equalTo(self.constraintsShowLabel);
+        make.bottom.equalTo(self.spacingSlider.mas_top).offset(-10);
     }];
     [self.constraintsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.wireframeSwitch.mas_right).offset(10);
-        make.right.equalTo(self);
-        make.top.equalTo(self);
+        make.left.right.equalTo(self);
+        make.bottom.equalTo(self);
         self.constrainsShowConstraint = make.height.equalTo(self).multipliedBy(0.3);
         self.constrainsHiddenConstraint = make.height.equalTo(self).multipliedBy(0);
     }];
     [self.constrainsShowConstraint deactivate];
-    [self.constrainsHiddenConstraint deactivate];
+    [self.constrainsHiddenConstraint activate];
 }
 
 - (SCNView *)scnView
@@ -338,7 +328,7 @@
     if (!_spacingSlider) {
         _spacingSlider = [UISlider new];
         _spacingSlider.minimumValue = 0.5;
-        _spacingSlider.maximumValue = 100;
+        _spacingSlider.maximumValue = 200;
         _spacingSlider.value = self.creator.spacing;
         [_spacingSlider addTarget:self action:@selector(spacingSliderChanged) forControlEvents:UIControlEventValueChanged];
     }
@@ -353,72 +343,13 @@
     return _depthSlider;
 }
 
-- (UILabel *)wireframeLabel
-{
-    if (!_wireframeLabel) {
-        _wireframeLabel = [UILabel new];
-        _wireframeLabel.text = @"仅展示边框";
-        _wireframeLabel.font = Font(14);
-        _wireframeLabel.textColor = HEXCOLOR(0x222333);
-    }
-    return _wireframeLabel;
-}
-
-- (UISwitch *)wireframeSwitch
-{
-    if (!_wireframeSwitch) {
-        _wireframeSwitch = [UISwitch new];
-        [_wireframeSwitch addTarget:self action:@selector(wireframeSwitchClicked) forControlEvents:UIControlEventValueChanged];
-    }
-    return _wireframeSwitch;
-}
-
-- (UILabel *)showHeaderLabel
-{
-    if (!_showHeaderLabel) {
-        _showHeaderLabel = [UILabel new];
-        _showHeaderLabel.text = @"展示header";
-        _showHeaderLabel.font = Font(14);
-        _showHeaderLabel.textColor = HEXCOLOR(0x222333);
-    }
-    return _showHeaderLabel;
-}
-
-- (UISwitch *)headerSwitch
-{
-    if (!_headerSwitch) {
-        _headerSwitch = [UISwitch new];
-        [_headerSwitch addTarget:self action:@selector(headerSwitchClicked) forControlEvents:UIControlEventValueChanged];
-    }
-    return _headerSwitch;
-}
-
-- (UILabel *)constraintsShowLabel
-{
-    if (!_constraintsShowLabel) {
-        _constraintsShowLabel = [UILabel new];
-        _constraintsShowLabel.text = @"展示约束";
-        _constraintsShowLabel.font = Font(14);
-        _constraintsShowLabel.textColor = HEXCOLOR(0x222333);
-    }
-    return _constraintsShowLabel;
-}
-
-- (UISwitch *)constraintsShowSwitch
-{
-    if (!_constraintsShowSwitch) {
-        _constraintsShowSwitch = [UISwitch new];
-        [_constraintsShowSwitch addTarget:self action:@selector(constraintsShowSwitchClicked) forControlEvents:UIControlEventValueChanged];
-    }
-    return _constraintsShowSwitch;
-}
-
 - (PEYConstraintsView *)constraintsView
 {
     if (!_constraintsView) {
         _constraintsView = [PEYConstraintsView new];
+        _constraintsView.creator = self.creator;
         _constraintsView.clipsToBounds = YES;
-        _constraintsView.backgroundColor = HEXACOLOR(0x222333, 0.5);
+        _constraintsView.backgroundColor = HEXACOLOR(0x222333, 0.9);
     }
     return _constraintsView;
 }

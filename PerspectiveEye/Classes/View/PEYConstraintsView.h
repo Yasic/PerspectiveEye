@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PEYSCNNodeCreator.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
  需要解析展示约束关系的目标视图
  */
 @property (nonatomic, strong) UIView *targetView;
+
+@property (nonatomic, strong) PEYSCNNodeCreator *creator;
 
 @end
 

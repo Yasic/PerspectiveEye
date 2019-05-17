@@ -162,7 +162,7 @@
 - (NSString *)elementIdentifier
 {
     if (!_elementIdentifier) {
-        _elementIdentifier = [[NSUUID UUID] UUIDString];
+        _elementIdentifier = [NSString stringWithFormat:@"%p", self.targetView];
     }
     return _elementIdentifier;
 }

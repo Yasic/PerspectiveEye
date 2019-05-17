@@ -15,6 +15,8 @@
 @property (nonatomic, strong) UIColor *boardHighlightColor;
 @property (nonatomic, assign) CGFloat headerMargin;
 
+@property (nonatomic, strong) PEYNodeSemanticNameManager *semanticManager;
+
 @end
 
 @implementation PEYSCNNodeCreator
@@ -23,17 +25,29 @@
 {
     self = [super init];
     if (self){
-        self.spacing = 25;
+        self.spacing = 50;
         self.smallZOffset = 1;
         self.boardNormalColor = HEXCOLOR(0x3399ff);
         self.boardHighlightColor = HEXACOLOR(0xff0000, 0.5);
         self.headerMargin = 10.0;
+        self.semanticManager = [[PEYNodeSemanticNameManager alloc] init];
     }
     return self;
 }
 
+- (UIColor *)colorForHeaderType:(PEVNodeGroupHeaderType)headerType
+{
+    NSArray *color = @[HEXCOLOR(0x3399ff), HEXCOLOR(0xfd5f00), HEXCOLOR(0x15cda8)];
+    if (headerType < 0 || headerType >= color.count) {
+        return HEXCOLOR(0x3399ff);
+    }
+    return color[headerType];
+}
+
 - (SCNNode *)makeGroupNodeWithElement:(PEYViewElement *)viewElement rootNode:(SCNNode *)rootNode parentViewElement:(PEYViewElement *)parentViewElement parentSCNNode:(SCNNode *)parentSCNNode depth:(CGFloat)depth
 {
+    // 初始化 node 的时候就构造语义化名称
+    [self.semanticManager nameForViewElement:viewElement];
     UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, viewElement.frame.size.width, viewElement.frame.size.height)];
     SCNShape *shape = [SCNShape shapeWithPath:path extrusionDepth:0.0];
     SCNMaterial *material = [[SCNMaterial alloc] init];
@@ -109,10 +123,10 @@
     return line;
 }
 
-- (SCNNode *)makeTitleWithViewElement:(PEYViewElement *)viewElement groupNode:(SCNNode *)groupNode
+- (SCNNode *)makeTitleWithViewElement:(PEYViewElement *)viewElement groupNode:(SCNNode *)groupNode bgColor:(UIColor *)bgColor
 {
     SCNText *nodeNameText = [[SCNText alloc] init];
-    nodeNameText.string = viewElement.nodeName;
+    nodeNameText.string = [self.semanticManager nameForViewElement:viewElement];
     nodeNameText.font = Font(14);
     nodeNameText.alignmentMode = kCAAlignmentCenter;
     nodeNameText.truncationMode = kCATruncationEnd;
@@ -124,7 +138,7 @@
     CGFloat headerWidth = MAX(self.headerMargin * 2 + textWidth, viewElement.frame.size.width);
     CGFloat headerHeight = textHeight + self.headerMargin * 2;
     CGRect frame = CGRectMake(0, 0, headerWidth, headerHeight);
-    SCNNode *headerNode = [self makeHeaderNodeWithFrame:frame];
+    SCNNode *headerNode = [self makeHeaderNodeWithFrame:frame withColor:bgColor];
     textNode.position = SCNVector3Make((frame.size.width - textWidth)/2, (frame.size.height - textHeight)/2, self.smallZOffset);
     [headerNode addChildNode:textNode];
     headerNode.position = SCNVector3Make((viewElement.frame.size.width - headerWidth)/2, viewElement.frame.size.height, self.smallZOffset);
@@ -132,13 +146,13 @@
     return headerNode;
 }
 
-- (SCNNode *)makeHeaderNodeWithFrame:(CGRect)frame
+- (SCNNode *)makeHeaderNodeWithFrame:(CGRect)frame withColor:(UIColor *)color
 {
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:frame byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(5, 5)];
     SCNShape *shape = [SCNShape shapeWithPath:path extrusionDepth:0.0];
     SCNMaterial *material = [[SCNMaterial alloc] init];
     material.doubleSided = YES;
-    material.diffuse.contents = HEXCOLOR(0x3399ff);
+    material.diffuse.contents = color;
     [shape insertMaterial:material atIndex:0];
     SCNNode *header = [SCNNode nodeWithGeometry:shape];
     return header;

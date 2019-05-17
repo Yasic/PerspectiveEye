@@ -19,6 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithViewElement:(PEYViewElement *)viewElement;
 
+- (void)onlyWireframe:(BOOL)isOn;
+- (void)showConstrants:(BOOL)isOn;
+- (void)showHeader:(BOOL)isOn;
+
 @end
 
 NS_ASSUME_NONNULL_END

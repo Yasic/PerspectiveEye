@@ -41,8 +41,7 @@
 - (void)enablePerspective
 {
     PEYPerspectiveViewController *vc = [[PEYPerspectiveViewController alloc] initWithTargetView:[UIApplication sharedApplication].keyWindow];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:nil];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)addViews

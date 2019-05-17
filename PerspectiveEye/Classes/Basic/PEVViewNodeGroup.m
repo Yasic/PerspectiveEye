@@ -38,8 +38,6 @@
     if (!self.creator) {
         return;
     }
-    [self.boardNode removeFromParentNode];
-    self.boardNode = [self.creator makeBoardWithViewElement:self.viewElement groupNode:self.groupNode highlight:isHighlight];
     if (!isHighlight) {
         [self.highlightNode removeFromParentNode];
     } else {
@@ -59,6 +57,13 @@
     self.headerNode.hidden = !showHeaderInfo;
 }
 
+- (void)showHeaderWithType:(PEVNodeGroupHeaderType)headerType
+{
+    [self.headerNode removeFromParentNode];
+    self.headerNode = [self.creator makeTitleWithViewElement:self.viewElement groupNode:self.groupNode bgColor:[self.creator colorForHeaderType:headerType]];
+    self.headerNode.hidden = NO;
+}
+
 - (CGFloat)renderToScene:(SCNScene *)scene parentNode:(PEYViewElement *)parentViewElement nodeGroupMap:(NSMutableDictionary *)nodeGroupMap depth:(CGFloat)depth
 {
     if (!self.creator) {
@@ -76,7 +81,7 @@
     self.nodeDepth = depth;
     self.elementNode = [self.creator makeElementNodeWithElement:self.viewElement groupNode:self.groupNode];
     self.boardNode = [self.creator makeBoardWithViewElement:self.viewElement groupNode:self.groupNode highlight:self.isHighlight];
-    self.headerNode = [self.creator makeTitleWithViewElement:self.viewElement groupNode:self.groupNode];
+    self.headerNode = [self.creator makeTitleWithViewElement:self.viewElement groupNode:self.groupNode bgColor:HEXCOLOR(222333)];
     // header 默认关闭
     self.headerNode.hidden = YES;
     [nodeGroupMap setObject:self forKey:self.viewElement.elementIdentifier];

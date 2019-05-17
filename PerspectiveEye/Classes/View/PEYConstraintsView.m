@@ -49,7 +49,7 @@
 @interface PEYConstraintsView()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray<NSString *> *constraintArray;
+@property (nonatomic, strong) NSMutableArray<NSAttributedString *> *constraintArray;
 
 @end
 
@@ -93,31 +93,50 @@
     [self.tableView reloadData];
 }
 
-- (NSString *)makeStringWithConstrant:(NSLayoutConstraint *)constraint
+- (NSAttributedString *)makeStringWithConstrant:(NSLayoutConstraint *)constraint
 {
-    NSMutableString *constraintsStr = [NSMutableString string];
-    [constraintsStr appendString:[NSString stringWithFormat:@"%@.%@ ", (constraint.firstItem == self.targetView) ? @"self" : [NSString stringWithFormat:@"%p", constraint.firstItem], [self attributeEnumToString:constraint.firstAttribute]]];
-    [constraintsStr appendString:[NSString stringWithFormat:@" %@ ", [self constraintRelationToString:constraint.relation]]];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] init];
+    [attrStr appendAttributedString:[self attributeStrForConstraintItem:constraint.firstItem andAttribute:constraint.firstAttribute]];
+    [attrStr appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ ", [self constraintRelationToString:constraint.relation]]]];
     if (constraint.secondItem) {
         if (constraint.multiplier < 0.0f) {
-            [constraintsStr appendString:@"-"];
+            [attrStr appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"-"]];
         }
-        [constraintsStr appendString:[NSString stringWithFormat:@"%@.%@", (constraint.secondItem == self.targetView) ? @"self" : [NSString stringWithFormat:@"%p", constraint.secondItem], [self attributeEnumToString:constraint.secondAttribute]]];
+        [attrStr appendAttributedString:[self attributeStrForConstraintItem:constraint.secondItem andAttribute:constraint.secondAttribute]];
         if (fabs(constraint.multiplier) != 1.0f) {
-            [constraintsStr appendString:@" * "];
-            [constraintsStr appendString:[NSString stringWithFormat:@"%.2f", fabs(constraint.multiplier)]];
+            [attrStr appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" * %.2f", fabs(constraint.multiplier)]]];
         }
     }
     if (constraint.constant > 0 && constraint.secondItem) {
-        [constraintsStr appendString:@" + "];
+        [attrStr appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@" + "]];
     }
     if (constraint.constant < 0) {
-        [constraintsStr appendString:@" - "];
+        [attrStr appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@" - "]];
     }
-    if (constraint != 0) {
-        [constraintsStr appendString:[NSString stringWithFormat:@"%.2f", fabs(constraint.constant)]];
+    if (constraint.constant != 0) {
+        [attrStr appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%.2f", fabs(constraint.constant)]]];
     }
-    return [constraintsStr copy];
+    return [attrStr copy];
+}
+
+- (NSMutableAttributedString *)attributeStrForConstraintItem:(id)item andAttribute:(NSLayoutAttribute)attribute
+{
+    NSMutableString *res = [[NSMutableString alloc] init];
+    UIColor *color = [self.creator colorForHeaderType:PEVNodeGroupHeaderTypeSelf];
+    if (item == self.targetView) {
+        res = [@"self" mutableCopy];
+    } else {
+        res = [[NSString stringWithFormat:@"$%@", [self.creator.semanticManager nameForElementIdentifier:[NSString stringWithFormat:@"%p", item]]] mutableCopy];
+        if (item == self.targetView.superview) {
+            color = [self.creator colorForHeaderType:PEVNodeGroupHeaderTypeParentView];
+        } else {
+            color = [self.creator colorForHeaderType:PEVNodeGroupHeaderTypeRelativeView];
+        }
+    }
+    [res appendString:[NSString stringWithFormat:@".%@ ", [self attributeEnumToString:attribute]]];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:res];
+    [attrStr addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, res.length)];
+    return attrStr;
 }
 
 - (NSString *)attributeEnumToString:(NSLayoutAttribute)attr
@@ -185,16 +204,11 @@
     return UITableViewAutomaticDimension;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PEYConstraintRelationCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([PEYConstraintRelationCell class]) forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.relationLabel.text = self.constraintArray[indexPath.row];
+    cell.relationLabel.attributedText = self.constraintArray[indexPath.row];
     return cell;
 }
 

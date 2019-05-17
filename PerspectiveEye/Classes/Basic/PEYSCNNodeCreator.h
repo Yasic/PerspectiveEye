@@ -8,15 +8,32 @@
 
 #import <Foundation/Foundation.h>
 #import "PEYViewElement.h"
+#import "PEYNodeSemanticNameManager.h"
+
+typedef NS_ENUM(NSUInteger, PEVNodeGroupHeaderType) {
+    PEVNodeGroupHeaderTypeSelf, // 当前选中的 view
+    PEVNodeGroupHeaderTypeParentView, // 当前选中 view 的父视图
+    PEVNodeGroupHeaderTypeRelativeView, // 与当前选中 view 有约束关系的 view
+};
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PEYSCNNodeCreator : NSObject
 
+@property (nonatomic, strong, readonly) PEYNodeSemanticNameManager *semanticManager;
+
 /**
  元素间距
  */
 @property (nonatomic, assign, readonly) CGFloat spacing;
+
+/**
+ 根据header类型获取主题色
+
+ @param headerType header类型
+ @return 对应的主题色
+ */
+- (UIColor *)colorForHeaderType:(PEVNodeGroupHeaderType)headerType;
 
 /**
  构建 groupNode，作为基准 node，确定一个 view 衍生出的边框、header、内容区等 node 的父 node
@@ -56,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param groupNode 所属的 groupNode
  @return 返回 headerNode
  */
-- (SCNNode *)makeTitleWithViewElement:(PEYViewElement *)viewElement groupNode:(SCNNode *)groupNode;
+- (SCNNode *)makeTitleWithViewElement:(PEYViewElement *)viewElement groupNode:(SCNNode *)groupNode bgColor:(UIColor *)bgColor;
 
 /**
  构建高亮蒙层节点
